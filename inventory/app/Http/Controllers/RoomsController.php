@@ -57,54 +57,55 @@ class RoomsController extends Controller
 
     // 
     // 
-    public function roomItems(Request $request, $id)
-    {
-        $room = rooms::findOrFail($id)->items;
+    // public function roomItems(Request $request)
+    // {
+    //     $room = rooms::findOrFail($request->id)->itemconn;
+    //     return response()->json(['rooms_num' => $room]);
+    // }
+    // // 
+    // // 
+    // public function roomsItemsAdd(Request $request)
+    // {
+    //     $request->validate([
+    //         'id' => 'required',
+    //         'items_name' => 'required|string',
+    //         'items_quantity' => 'required|integer',
+    //     ]);
 
+    //     // Find the room or fail
+    //     $room = rooms::findOrFail($request->id);
 
-        return response()->json(['rooms_num' => $room]);
-    }
-    // 
-    // 
+    //     // Check if the item is available
+    //     $itemAvailable = $this->itemavilable()
+    //         ->where('name', $request->items_name) // Assuming 'name' is a column in your 'available' table
+    //         ->where('quantity', '>=', $request->items_quantity) // Assuming 'quantity' is a column in your 'available' table
+    //         ->exists();
 
+    //     if ($itemAvailable) {
+    //         // Add the item to the room
+    //         // You need to implement the logic to add the item to the room here
 
-    public function roomsItemsAdd(Request $request)
-    {
-        $request->validate([
-            'id' => 'required',
-            'items_name' => 'required|string',
-            'items_quantity' => 'required|integer',
-        ]);
-
-
-        $room = rooms::findOrFail($request->id);
-
-
-        $item = new items();
-        $item->items_name = $request->items_name;
-        $item->items_quantity = $request->items_quantity;
-
-
-        $room->itemcon()->save($item);
-
-        return response()->json(['message' => 'Item added successfully']);
-    }
-    // 
-    // 
-    public function roomsItemsUpdate(Request $request)
-    {
-        $request->validate([
-            'rooms_id' => 'required',
-            'id' => 'required',
-            'items_name' => 'required|string',
-            'items_quantity' => 'required|integer',
-        ]);
-        $item = items::where('rooms_id', $request->rooms_id)
-            ->findOrFail($request->id);
-        $item->update([
-            "items_name" => $request->items_name,
-            "items_quantity" => $request->items_quantity
-        ]);
-        return response()->json(['message' => 'successful']);
-    }
+    //         return response()->json(['message' => 'Item added successfully']);
+    //     } else {
+    //         return response()->json(['message' => 'Item not available'], 404);
+    //     }
+    // }
+    // // 
+    // // 
+    // public function roomsItemsUpdate(Request $request)
+    // {
+    //     $request->validate([
+    //         'rooms_id' => 'required',
+    //         'id' => 'required',
+    //         'items_name' => 'required|string',
+    //         'items_quantity' => 'required|integer',
+    //     ]);
+    //     $item = items::where('rooms_id', $request->rooms_id)
+    //         ->findOrFail($request->id);
+    //     $item->update([
+    //         "items_name" => $request->items_name,
+    //         "items_quantity" => $request->items_quantity
+    //     ]);
+    //     return response()->json(['message' => 'successful']);
+    // }
 }

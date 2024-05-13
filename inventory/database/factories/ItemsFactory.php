@@ -17,11 +17,7 @@ class ItemsFactory extends Factory
      */
     public function definition(): array
     {
-        $roomIds = rooms::pluck('id')->toArray();
-        $roomId = fake()->randomElement($roomIds);
-
         return [
-            'rooms_id' => $roomId,
             'items_name' => fake()->word,
             'items_quantity' => fake()->numberBetween(1, 100),
         ];

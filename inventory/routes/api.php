@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ItemsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoomsController;
@@ -20,6 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // Route::post('/auth/register', [AdminController::class, 'createUser']);
 // Route::post('/auth/login', [AdminController::class, 'loginUser']);
+
 // { pang rooms
 // pang dispaly ng rooms
 Route::get('rooms', [RoomsController::class, 'displayRooms']);
@@ -39,3 +41,13 @@ Route::get('rooms/items/{id}', [RoomsController::class, 'roomItems']);
 Route::post('rooms/items/add', [RoomsController::class, 'roomsItemsAdd']);
 // pang update ng room namay items
 Route::post('rooms/items/update', [RoomsController::class, 'roomsItemsUpdate']);
+//
+////
+////
+////
+// pang items
+Route::get('items', [ItemsController::class, 'displayItems']);
+Route::post('items/add', [ItemsController::class, 'addItems']);
+Route::post('items/update/{id}', [ItemsController::class, 'addItems']);
+
+Route::post('items/delete/{id}', [ItemsController::class, 'deleteItems']);

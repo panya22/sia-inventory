@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\items::factory(20)->create();
         \App\Models\borrowers::factory(10)->create();
         \App\Models\borrowingItems::factory(10)->create();
+        \App\Models\roomInventory::factory(20)->create();
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([
