@@ -4,6 +4,8 @@ use App\Http\Controllers\ItemsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoomsController;
+use App\Models\roomInventory;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -33,21 +35,16 @@ Route::post('rooms/add', [RoomsController::class, 'addrooms']);
 Route::post('rooms/update/{id}', [RoomsController::class, 'updateRooms']);
 // pang delete rooms 
 Route::post('rooms/delete/{id}', [RoomsController::class, 'deleteRooms']);
-// }
-// {pang rooms namay items
-//pang display ng rooms namay items
-Route::get('rooms/items/{id}', [RoomsController::class, 'roomItems']);
-// pang add ng items
-Route::post('rooms/items/add', [RoomsController::class, 'roomsItemsAdd']);
-// pang update ng room namay items
-Route::post('rooms/items/update', [RoomsController::class, 'roomsItemsUpdate']);
-//
-////
-////
-////
+
+
 // pang items
 Route::get('items', [ItemsController::class, 'displayItems']);
 Route::post('items/add', [ItemsController::class, 'addItems']);
-Route::post('items/update/{id}', [ItemsController::class, 'addItems']);
-
+Route::post('items/update/{id}', [ItemsController::class, 'updateItems']);
 Route::post('items/delete/{id}', [ItemsController::class, 'deleteItems']);
+
+
+// pang distribute ng items
+Route::get('/rooms/{roomId}/inventory', [roomInventory::class, 'showRoomInventory']);
+Route::post('/rooms/{roomId}/inventory/add', [roomInventory::class, 'addItemToRoom']);
+Route::get('/items/available', [ItemsController::class, 'getAvailableItems']);

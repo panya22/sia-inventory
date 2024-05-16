@@ -53,4 +53,10 @@ class ItemsController extends Controller
         $items->delete();
         return response()->json(['message' => 'successfull']);
     }
+
+    public function getAvailableItems()
+    {
+        $availableItems = items::whereDoesntHave('roomInventories')->get();
+        return response()->json($availableItems);
+    }
 }
