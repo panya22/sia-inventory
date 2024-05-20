@@ -35,13 +35,13 @@ class ItemsController extends Controller
         $item = items::findOrFail($request->id);
 
         $request->validate([
-            'item_name' => 'required',
-            'item_quantity' => 'required|numeric'
+            'items_name' => 'required',
+            'items_quantity' => 'required|numeric'
         ]);
 
         $item->update([
-            'item_name' => $request->item_name,
-            'item_quantity' => $request->item_quantity
+            'items_name' => $request->items_name,
+            'items_quantity' => $request->items_quantity
         ]);
 
         return response()->json(['message' => 'successful']);

@@ -25,16 +25,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Route::post('/auth/register', [AdminController::class, 'createUser']);
 // Route::post('/auth/login', [AdminController::class, 'loginUser']);
 
-// { pang rooms
-// pang dispaly ng rooms
 Route::get('rooms', [RoomsController::class, 'displayRooms']);
-// pang dispaly ng single room
 Route::get('rooms/{id}', [RoomsController::class, 'displaySingleRooms']);
-// pang add ng rooms
 Route::post('rooms/add', [RoomsController::class, 'addrooms']);
-// pang update ng room
 Route::post('rooms/update/{id}', [RoomsController::class, 'updateRooms']);
-// pang delete rooms 
 Route::post('rooms/delete/{id}', [RoomsController::class, 'deleteRooms']);
 
 
