@@ -7,6 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class borrowingItems extends Model
 {
+    protected $table = 'borrowing_items';
+    protected $primaryKey = 'id';
+    public $timestamps = true;
+    protected $fillable = [
+        'rooms_id', 'borrowers_id', 'date_borrowed', 'date_return', 'status', 'created_at', 'updated_at'
+    ]; 
+
     use HasFactory;
     public function borrower()
     {

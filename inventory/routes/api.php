@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoomsController;
 use App\Models\roomInventory;
+use App\Http\Controllers\BorrowingItemsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,3 +49,11 @@ Route::post('items/delete/{id}', [ItemsController::class, 'deleteItems']);
 Route::get('/rooms/{roomId}/inventory', [roomInventory::class, 'showRoomInventory']);
 Route::post('/rooms/{roomId}/inventory/add', [roomInventory::class, 'addItemToRoom']);
 Route::get('/items/available', [ItemsController::class, 'getAvailableItems']);
+
+//Borrowing Items
+Route::get('/borrowitem/new', [BorrowingItemsController::class, 'showNewestStatusId']); 
+Route::get('/borrowitem', [BorrowingItemsController::class, 'allBorrows']);
+Route::post('/borrowitem', [BorrowingItemsController::class, 'createBorrowStatus']); 
+Route::get('/borrowitem/user/{id}', [BorrowingItemsController::class, 'getAllBorrowByStudent']); 
+Route::get('/borrowitem/borrow/{id}', [BorrowingItemsController::class, 'getAllBorrowByBorrow']); 
+Route::put('/borrowitem/{id}', [BorrowingItemsController::class, 'updateBorrowStatus']); 
