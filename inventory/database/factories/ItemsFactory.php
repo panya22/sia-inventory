@@ -20,6 +20,7 @@ class ItemsFactory extends Factory
         return [
             'items_name' => fake()->word,
             'items_quantity' => fake()->numberBetween(1, 100),
+            'type' => $this->faker->randomElement(['classroom', 'school supply']),
         ];
     }
 }

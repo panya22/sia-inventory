@@ -20,12 +20,14 @@ class ItemsController extends Controller
         $request->validate([
             'items_name' => 'required',
             'items_quantity' => 'required',
+            'type' => 'required',
         ]);
 
 
         $item = new items();
         $item->items_name = $request->items_name;
         $item->items_quantity = $request->items_quantity;
+        $item->type = $request->type;
 
         $item->save();
     }
@@ -36,12 +38,14 @@ class ItemsController extends Controller
 
         $request->validate([
             'items_name' => 'required',
-            'items_quantity' => 'required|numeric'
+            'items_quantity' => 'required|numeric',
+            'type' => 'required',
         ]);
 
         $item->update([
             'items_name' => $request->items_name,
-            'items_quantity' => $request->items_quantity
+            'items_quantity' => $request->items_quantity,
+            'type' => $request->type
         ]);
 
         return response()->json(['message' => 'successful']);
@@ -54,9 +58,5 @@ class ItemsController extends Controller
         return response()->json(['message' => 'successfull']);
     }
 
-    public function getAvailableItems()
-    {
-        $availableItems = items::whereDoesntHave('roomInventories')->get();
-        return response()->json($availableItems);
-    }
+
 }

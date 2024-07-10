@@ -11,15 +11,12 @@ class items extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['items_name', 'items_quantity'];
+    protected $fillable = ['items_name', 'items_quantity' , 'type'];
 
     public function roomInventories()
     {
         return $this->hasMany(RoomInventory::class);
     }
 
-    public function availableItem()
-    {
-        return $this->hasOne(availableItems::class);
-    }
+
 }
