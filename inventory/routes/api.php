@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\BorrowedItemController;
 use App\Http\Controllers\ItemsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoomsController;
 use App\Models\roomInventory;
 use App\Http\Controllers\BorrowingItemsController;
+use App\Http\Controllers\DamageItemController;
 use App\Http\Controllers\DashboardController;
 
 /*
@@ -24,11 +26,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // Rooms
-Route::get('rooms', [RoomsController::class, 'displayRooms']);
-Route::get('rooms/{id}', [RoomsController::class, 'displaySingleRooms']);
-Route::post('rooms/add', [RoomsController::class, 'addrooms']);
-Route::post('rooms/update/{id}', [RoomsController::class, 'updateRooms']);
-Route::post('rooms/delete/{id}', [RoomsController::class, 'deleteRooms']);
+// Route::get('rooms', [RoomsController::class, 'displayRooms']);
+// Route::get('rooms/{id}', [RoomsController::class, 'displaySingleRooms']);
+// Route::post('rooms/add', [RoomsController::class, 'addrooms']);
+// Route::post('rooms/update/{id}', [RoomsController::class, 'updateRooms']);
+// Route::post('rooms/delete/{id}', [RoomsController::class, 'deleteRooms']);
+
+
+// Dashboard
+Route::get('/dashboard', [DashboardController::class, 'index']);
 
 
 //Items
@@ -38,23 +44,17 @@ Route::post('items/update/{id}', [ItemsController::class, 'updateItems']);
 Route::post('items/delete/{id}', [ItemsController::class, 'deleteItems']);
 
 
-// pang distribute ng items di pa tapos
-Route::get('/rooms/{roomId}/inventory', [roomInventory::class, 'showRoomInventory']);
-Route::post('/rooms/{roomId}/inventory/add', [roomInventory::class, 'addItemToRoom']);
-Route::get('/items/available', [ItemsController::class, 'getAvailableItems']);
-
-//Dashboard
-Route::get('dashboardview',[DashboardController::class, 'getDashboard']);
+Route::get('/borrowed-items', [BorrowedItemController::class, 'index']);
+    Route::post('/borrowed-items', [BorrowedItemController::class, 'store']);
+    Route::get('total-borrowed-quantity-per-item', [BorrowedItemController::class, 'totalBorrowedQuantityPerItem']);
+    Route::post('/borrowed-items/return', [BorrowedItemController::class, 'returnItem'])->name('borrowed-items.return');
+    Route::get('total-overdue-quantities-per-item', [BorrowedItemController::class, 'totalOverdueQuantitiesPerItem']);
 
 
+    Route::get('/damaged-items', [DamageItemController::class, 'index']);
+    Route::post('damaged-items', [BorrowedItemController::class, 'markAsDamaged']);
+    Route::post('/damaged-items/repair', [DamageItemController::class, 'repairItem']);
 
-
-
-//Borrowing Items
-// Route::get('/borrowitem/new', [BorrowingItemsController::class, 'showNewestStatusId']);
-// Route::get('/borrowitem', [BorrowingItemsController::class, 'allBorrows']);
-// Route::post('/borrowitem', [BorrowingItemsController::class, 'createBorrowStatus']);
-// Route::get('/borrowitem/user/{id}', [BorrowingItemsController::class, 'getAllBorrowByStudent']);
-// Route::get('/borrowitem/borrow/{id}', [BorrowingItemsController::class, 'getAllBorrowByBorrow']);
-// Route::put('/borrowitem/{id}', [BorrowingItemsController::class, 'updateBorrowStatus'])
-
+    // Route::get('/profile', [ProfileController::class, 'edit']);
+    // Route::patch('/profile', [ProfileController::class, 'update']);
+    // Route::delete('/profile', [ProfileController::class, 'destroy']);

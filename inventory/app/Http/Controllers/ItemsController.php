@@ -11,25 +11,25 @@ class ItemsController extends Controller
     public function displayItems(Request $request)
     {
         $item = items::all();
-        return $item;
+        return response()->json($item);
     }
 
 
     public function addItems(Request $request)
     {
         $request->validate([
-            'items_name' => 'required',
-            'items_quantity' => 'required',
-            'type' => 'required',
+            'item_name' => 'required|string|max:255',
+            'item_quantity' => 'required|integer',
+            'category' => 'required|string|max:255',
+            'unit_of_measure' => 'required|string|max:255',
+            'school_level' => 'required|string|max:255',
+            'room_number' => 'required|integer',
+            'acceptedby' => 'required|string|max:255',
         ]);
 
+        $item = items::create($request->all());
 
-        $item = new items();
-        $item->items_name = $request->items_name;
-        $item->items_quantity = $request->items_quantity;
-        $item->type = $request->type;
-
-        $item->save();
+        return response()->json(['message' => 'successful added']);
     }
 
     public function updateItems(Request $request)
@@ -37,25 +37,34 @@ class ItemsController extends Controller
         $item = items::findOrFail($request->id);
 
         $request->validate([
-            'items_name' => 'required',
-            'items_quantity' => 'required|numeric',
-            'type' => 'required',
+            'item_name' => 'required|string|max:255',
+            'item_quantity' => 'required|integer',
+            'category' => 'required|string|max:255',
+            'unit_of_measure' => 'required|string|max:255',
+            'school_level' => 'required|string|max:255',
+            'room_number' => 'required|integer',
+            'acceptedby' => 'required|string|max:255',
         ]);
 
-        $item->update([
-            'items_name' => $request->items_name,
-            'items_quantity' => $request->items_quantity,
-            'type' => $request->type
-        ]);
+        $item->update($request->only([
+            'item_name',
+            'item_quantity',
+            'category',
+            'unit_of_measure',
+            'school_level',
+            'room_number',
+            'acceptedby'
+        ]));
 
-        return response()->json(['message' => 'successful']);
+        return response()->json(['message' => 'successful updated']);
     }
+
 
     public function deleteItems(Request $request)
     {
         $items = items::findOrFail($request->id);
         $items->delete();
-        return response()->json(['message' => 'successfull']);
+        return response()->json(['message' => 'successfull Deleted']);
     }
 
 

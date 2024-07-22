@@ -19,8 +19,8 @@ class RoomsController extends Controller
         $rooms = rooms::find($request->id);
         return $rooms;
     }
-    // 
-    // 
+    //
+    //
     public function addRooms(Request $request)
     {
         $request->validate([
@@ -31,8 +31,8 @@ class RoomsController extends Controller
         $rooms->save();
         return response()->json(['message' => 'successful']);
     }
-    // 
-    // 
+    //
+    //
     public function updateRooms(Request $request, $id)
     {
         $rooms = rooms::findOrFail($id);
