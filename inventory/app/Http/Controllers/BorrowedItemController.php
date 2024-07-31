@@ -66,17 +66,11 @@ class BorrowedItemController extends Controller
             'quantity' => 'required|integer|min:1',
         ]);
 
-        // Find the borrowed item using the item_id
         $borrowedItem = borrowedItems::where('item_id', $request->item_id)->first();
-
-        // Find the original item
         $item = items::find($borrowedItem->item_id);
-
-        // Update the item's stock
         $item->item_quantity += $request->quantity;
         $item->save();
 
-        // Delete the borrowed item
         $borrowedItem->delete();
 
         return response()->json(['message' => 'return successfull']);

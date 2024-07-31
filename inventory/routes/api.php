@@ -47,7 +47,7 @@ Route::post('items/delete/{id}', [ItemsController::class, 'deleteItems']);
 Route::get('/borrowed-items', [BorrowedItemController::class, 'index']);
     Route::post('/borrowed-items', [BorrowedItemController::class, 'store']);
     Route::get('total-borrowed-quantity-per-item', [BorrowedItemController::class, 'totalBorrowedQuantityPerItem']);
-    Route::post('/borrowed-items/return', [BorrowedItemController::class, 'returnItem'])->name('borrowed-items.return');
+    Route::post('/borrowed-items/return', [BorrowedItemController::class, 'returnItem']);
     Route::get('total-overdue-quantities-per-item', [BorrowedItemController::class, 'totalOverdueQuantitiesPerItem']);
 
 
