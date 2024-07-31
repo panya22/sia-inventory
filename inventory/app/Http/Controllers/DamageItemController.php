@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\damageItems;
 use App\Models\items;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DamageItemController extends Controller
 {
@@ -34,5 +35,14 @@ class DamageItemController extends Controller
         $damagedItem->delete();
 
         return response()->json(['message' => 'Item repaired successfully']);
+    }
+
+    public function totalDamagedQuantitiesPerItem()
+    {
+        $damagedQuantities = damageItems::select('item_id', DB::raw('SUM(quantity) as total_damaged'))
+            ->groupBy('item_id')
+            ->get();
+
+        return response()->json($damagedQuantities);
     }
 }

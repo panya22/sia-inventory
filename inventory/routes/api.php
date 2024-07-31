@@ -46,13 +46,14 @@ Route::post('items/delete/{id}', [ItemsController::class, 'deleteItems']);
 
 Route::get('/borrowed-items', [BorrowedItemController::class, 'index']);
     Route::post('/borrowed-items', [BorrowedItemController::class, 'store']);
-    Route::get('total-borrowed-quantity-per-item', [BorrowedItemController::class, 'totalBorrowedQuantityPerItem']);
+    Route::get('/total-borrowed-quantity-per-item', [BorrowedItemController::class, 'totalBorrowedQuantityPerItem']);
     Route::post('/borrowed-items/return', [BorrowedItemController::class, 'returnItem']);
-    Route::get('total-overdue-quantities-per-item', [BorrowedItemController::class, 'totalOverdueQuantitiesPerItem']);
+    Route::get('/total-overdue-quantities-per-item', [BorrowedItemController::class, 'totalOverdueQuantitiesPerItem']);
 
 
     Route::get('/damaged-items', [DamageItemController::class, 'index']);
-    Route::post('damaged-items', [BorrowedItemController::class, 'markAsDamaged']);
+    Route::get('/total-damage-quantity-per-item', [DamageItemController::class, 'totalDamagedQuantitiesPerItem']);
+    Route::post('/damaged-items', [BorrowedItemController::class, 'markAsDamaged']);
     Route::post('/damaged-items/repair', [DamageItemController::class, 'repairItem']);
 
     // Route::get('/profile', [ProfileController::class, 'edit']);
