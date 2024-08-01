@@ -38,11 +38,26 @@ class DashboardController extends Controller
             'damaged_items' => damageItems::where('school_level', 'Senior High School')->sum('quantity'),
         ];
 
+        // Get Most Borrowed Items
+        $mostBorrowedItems = borrowedItems::select('item_id', 'item_name', \DB::raw('SUM(quantity) as borrowed_quantity'))
+            ->groupBy('item_id', 'item_name')
+            ->orderBy('borrowed_quantity', 'DESC')
+            ->limit(5)
+            ->get();
+
+        // Get Most Damaged Items
+        $mostDamagedItems = damageItems::select('item_id', 'item_name', \DB::raw('SUM(quantity) as damaged_quantity'))
+            ->groupBy('item_id', 'item_name')
+            ->orderBy('damaged_quantity', 'DESC')
+            ->limit(5)
+            ->get();
+
         return response()->json([
             'totals' => $totals,
             'juniorHighInventory' => $juniorHighInventory,
             'seniorHighInventory' => $seniorHighInventory,
+            'mostBorrowedItems' => $mostBorrowedItems,
+            'mostDamagedItems' => $mostDamagedItems,
         ]);
-
     }
 }
