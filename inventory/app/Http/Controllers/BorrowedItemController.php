@@ -91,11 +91,13 @@ class BorrowedItemController extends Controller
     public function markAsDamaged(Request $request)
     {
         $request->validate([
-            'item_id' => 'required|integer|exists:borrowed_items,id',
+            'item_id' => 'required|integer|exists:borrowed_items,item_id',
+            'report_by' => 'required|string',
+            'description' => 'required|string',
             'date_reported' => 'required|date',
         ]);
 
-        $borrowedItem = borrowedItems::find($request->item_id);
+        $borrowedItem = borrowedItems::where('item_id', $request->item_id)->first();
         if ($borrowedItem) {
             // Move to damaged_items table
             damageItems::create([
@@ -117,7 +119,7 @@ class BorrowedItemController extends Controller
 
             return response()->json(['message' => 'successfull to damage item']);
         }
-        return response()->json(['message' => 'successfull']);
+        return response()->json(['message' => 'Item not found'], 404);
     }
 
 }

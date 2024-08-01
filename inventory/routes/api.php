@@ -8,7 +8,9 @@ use App\Http\Controllers\RoomsController;
 use App\Models\roomInventory;
 use App\Http\Controllers\BorrowingItemsController;
 use App\Http\Controllers\DamageItemController;
+use App\Http\Controllers\UnusableItemController;
 use App\Http\Controllers\DashboardController;
+use App\Models\unusableItems;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +57,9 @@ Route::get('/borrowed-items', [BorrowedItemController::class, 'index']);
     Route::get('/total-damage-quantity-per-item', [DamageItemController::class, 'totalDamagedQuantitiesPerItem']);
     Route::post('/damaged-items', [BorrowedItemController::class, 'markAsDamaged']);
     Route::post('/damaged-items/repair', [DamageItemController::class, 'repairItem']);
+
+    Route::get('/unusable-items', [UnusableItemController::class, 'index']);
+    Route::post('/unusable-items', [UnusableItemController::class, 'store']);
 
     // Route::get('/profile', [ProfileController::class, 'edit']);
     // Route::patch('/profile', [ProfileController::class, 'update']);

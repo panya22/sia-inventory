@@ -15,10 +15,34 @@ class DamageItemController extends Controller
         return response()->json($items);
     }
 
+    public function store(Request $request)
+{
+    $request->validate([
+        'item_id' => 'required|integer|exists:borrowed_items,item_id',
+        'item_name' => 'required|string',
+        'category' => 'required|string',
+        'unit_of_measure' => 'required|string',
+        'room_number' => 'required|string',
+        'school_level' => 'required|string',
+        'report_by' => 'required|string',
+        'description' => 'required|string',
+        'date_reported' => 'required|date',
+        'adviser' => 'required|string',
+        'quantity' => 'required|integer',
+    ]);
+
+    damageItems::create($request->all());
+
+
+    return response()->json(['message' => 'Item marked as damaged successfully']);
+}
+
+
+
     public function repairItem(Request $request)
     {
         $request->validate([
-            'item_id' => 'required|integer|exists:damaged_items,item_id',
+            'item_id' => 'required|integer|exists:damage_items,item_id',
             'quantity' => 'required|integer',
         ]);
 
