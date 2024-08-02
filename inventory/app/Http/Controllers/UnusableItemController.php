@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\damageItems;
 use App\Models\unusableItems;
 use Illuminate\Http\Request;
 
@@ -27,8 +28,16 @@ class UnusableItemController extends Controller
             'quantity' => 'required|integer',
         ]);
 
+               // Find the damaged item using the item_id
+        $damagedItem = damageItems::where('item_id', $request->item_id)->first();
+
+        if (!$damagedItem) {
+            return response()->json(['message' => 'Damaged item not found'], 404);
+        }
+
         unusableItems::create($request->all());
 
+        $damagedItem->delete();
 
         return response()->json(['message' => 'Item marked as unusable successfully']);
     }

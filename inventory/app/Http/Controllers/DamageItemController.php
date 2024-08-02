@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\damageItems;
+use App\Models\unusableItems;
 use App\Models\items;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -37,8 +38,6 @@ class DamageItemController extends Controller
     return response()->json(['message' => 'Item marked as damaged successfully']);
 }
 
-
-
     public function repairItem(Request $request)
     {
         $request->validate([
@@ -69,4 +68,5 @@ class DamageItemController extends Controller
 
         return response()->json($damagedQuantities);
     }
+
 }

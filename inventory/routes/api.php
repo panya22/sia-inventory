@@ -57,6 +57,7 @@ Route::get('/borrowed-items', [BorrowedItemController::class, 'index']);
     Route::get('/total-damage-quantity-per-item', [DamageItemController::class, 'totalDamagedQuantitiesPerItem']);
     Route::post('/damaged-items', [BorrowedItemController::class, 'markAsDamaged']);
     Route::post('/damaged-items/repair', [DamageItemController::class, 'repairItem']);
+    Route::post('/damaged-items/unusable', [DamageItemController::class, 'returnAsDamaged']);
 
     Route::get('/unusable-items', [UnusableItemController::class, 'index']);
     Route::post('/unusable-items', [UnusableItemController::class, 'store']);
@@ -64,3 +65,7 @@ Route::get('/borrowed-items', [BorrowedItemController::class, 'index']);
     // Route::get('/profile', [ProfileController::class, 'edit']);
     // Route::patch('/profile', [ProfileController::class, 'update']);
     // Route::delete('/profile', [ProfileController::class, 'destroy']);
+
+
+
+
