@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('unit_of_measure');
             $table->string('room_number');
             $table->string('school_level');
-            $table->string('borrower');
+            $table->string('student_id');
             $table->integer('quantity');
             $table->date('borrow_date');
             $table->date('return_date');

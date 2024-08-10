@@ -17,7 +17,7 @@ class borrowedItems extends Model
         'unit_of_measure',
         'room_number',
         'school_level',
-        'borrower',
+        'student_id',
         'quantity',
         'borrow_date',
         'return_date',
